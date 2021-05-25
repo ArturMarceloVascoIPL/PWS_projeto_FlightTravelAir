@@ -1,0 +1,73 @@
+<?php
+use ArmoredCore\WebObjects\Asset;
+use ArmoredCore\WebObjects\Layout;
+use ArmoredCore\WebObjects\URL;
+use ArmoredCore\WebObjects\Data;
+
+Layout::includeLayout('headeradmin'); ?>
+<?php
+$users = Data::get('users');
+$aeroportos = Data::get('aeroportos');
+?>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <h1 class="lead"><b>Bem Vindo - Administrador</b><br><small>Pode gerir aqui os Utilizadores e os Aeroportos disponiveis.</small><br></h1>
+            </div>
+        </div>
+    </header>
+    <!-- /Header -->
+
+    <!-- container -->
+    <div class="container">
+
+        <h2 class="text-left top-space">Lista de Utilizadores</h2>
+        <div class="row"> <!-- row -->
+            <div class="col-sm-12">
+                <table class="table table-striped"><thead><th><h3>Id</h3></th><th><h3>Nome</h3></th><th><h3>Morada</h3></th><th><h3>Email</h3></th><th><h3>NIF</h3></th><th><h3>Telefone</h3></th><th><h3>Role</h3></th></thead>
+                    <tbody>
+                    <?php foreach ($users as $user) { ?>
+                        <tr>
+                            <td><?=$user->id?></td>
+                            <td><?=$user->nome?></td>
+                            <td><?=$user->morada?></td>
+                            <td><?=$user->email?></td>
+                            <td><?=$user->nif?></td>
+                            <td><?=$user->telefone?></td>
+                            <td><?=$user->role?></td>
+                        </tr>
+                    <?php } ?>
+
+                    </tbody>
+                </table>
+            </div>
+        </div> <!-- /row -->
+
+    </div>	<!-- /container -->
+
+    <!-- container -->
+    <div class="container">
+
+        <h2 class="text-left top-space">Lista de Aeroportos</h2>
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-striped"><thead><th><h3>Id</h3></th><th><h3>Nome</h3></th><th><h3>Localização</h3></th></thead>
+                    <tbody>
+                    <?php foreach ($aeroportos as $aeroporto) { ?>
+                        <tr>
+                            <td><?=$aeroporto->idaeroporto?></td>
+                            <td><?=$aeroporto->nome?></td>
+                            <td><?=$aeroporto->localizacao?></td>
+                        </tr>
+                    <?php } ?>
+
+                    </tbody>
+                </table>
+            </div>
+        </div> <!-- /row -->
+
+    </div>	<!-- /container -->
+
+<?php Layout::includeLayout('footer')?>
