@@ -124,15 +124,28 @@ class MVCInspector
 
                 default :
 
-                    $classInterfaces = class_implements($controller);
+                    try {
 
-                    if (array_key_exists('ArmoredCore\Interfaces\ResourceControllerInterface', $classInterfaces)) {
-                        $tag = '(User defined Controller [Resource Controller type])';
-                    } else {
-                        $tag = '(User defined Controller)';
-                    }
+                        if (class_exists($controller)){
+                            $classInterfaces = class_implements($controller);
 
-                    break;
+                            if (array_key_exists('ArmoredCore\Interfaces\ResourceControllerInterface', $classInterfaces)) {
+                                $tag = ' (User defined Controller [Resource Controller type])';
+                            } else {
+                                $tag = ' (User defined Controller)';
+                            }
+                        } else {
+                            $tag = ' (Warning: Incomplete User defined Controller)';
+                        }
+
+
+
+                    } catch (Exception $e){
+
+                        $tag = ' (Warning: Incomplete User defined Controller)';
+                }
+
+
             }
 
             array_push($taggedControllers, ($controller . $tag));
