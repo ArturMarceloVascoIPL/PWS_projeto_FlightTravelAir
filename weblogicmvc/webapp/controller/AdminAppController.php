@@ -9,7 +9,7 @@ class AdminAppController extends BaseAuthController
     public function index()
     {
         $this->loginFilterByRole('admin');
-        $users = User::all();
+        $users = User::all(array('conditions' => array('role != ?','passageiro')));
         $aeroportos = Aeroporto::all();
         return View::make('admin.index', ['users' => $users, 'aeroportos' => $aeroportos]);
     }
@@ -26,6 +26,7 @@ class AdminAppController extends BaseAuthController
 
     public function createUser()
     {
+        $this->loginFilterByRole('admin');
         return View::make('admin.createuser');
     }
 
@@ -46,6 +47,7 @@ class AdminAppController extends BaseAuthController
 
     public function editUser($id)
     {
+        $this->loginFilterByRole('admin');
         $user = User::find([$id]);
 
         if (is_null($user)) {
@@ -89,6 +91,7 @@ class AdminAppController extends BaseAuthController
 
     public function createAeroporto()
     {
+        $this->loginFilterByRole('admin');
         return View::make('admin.createaeroporto');
     }
 
@@ -109,6 +112,7 @@ class AdminAppController extends BaseAuthController
 
     public function editAeroporto($idaeroporto)
     {
+        $this->loginFilterByRole('admin');
         $aeroporto = Aeroporto::find([$idaeroporto]);
 
         if (is_null($aeroporto)) {
