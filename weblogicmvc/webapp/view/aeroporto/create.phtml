@@ -3,7 +3,7 @@ use ArmoredCore\WebObjects\ErrMgr;
 use ArmoredCore\WebObjects\Layout;
 use ArmoredCore\WebObjects\URL;
 
-Layout::includeLayout('headeradmin') ?>
+Layout::includeLayout('gestorvooheader') ?>
 <?php $aeroporto = Data::get('aeroporto')?>
 <?php ErrMgr::attach($aeroporto) ?>
 
@@ -23,7 +23,7 @@ Layout::includeLayout('headeradmin') ?>
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <hr>
-                            <form method="post" action="<?=Url::toRoute('adminapp/storeaeroporto')?>">
+                            <form method="post" action="<?=Url::toRoute('aeroporto/store')?>">
                                 <div class="top-margin">
                                     <label>Nome <span class="text-danger">*</span></label>
                                     <input type="text" value="<?=$aeroporto->nome?>" name="nome" class="form-control" placeholder="Nome do Aeroporto">
@@ -42,7 +42,7 @@ Layout::includeLayout('headeradmin') ?>
                                     <button class="btn btn-action" type="submit">Novo</button>
                                 </div>
                                 <div class="col-lg-5 text-right">
-                                    <a href="<?=Url::toRoute('adminapp/geriraeroportos')?>">
+                                    <a href="<?=Url::toRoute('aeroporto/index')?>">
                                         <button class="btn btn-danger" type="button">Cancelar</button>
                                     </a>
                                 </div>

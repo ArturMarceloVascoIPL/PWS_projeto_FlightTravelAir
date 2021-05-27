@@ -36,20 +36,10 @@ Router::post('login/dologin',       'LoginController/doLogin');
 Router::get('adminapp/index',               'AdminAppController/index');
 
 //Users
-Router::get('adminapp/gerirusers',         'AdminAppController/gerirUsers');
-Router::get('adminapp/createuser',         'AdminAppController/createUser');
-Router::post('adminapp/storeuser',         'AdminAppController/storeUser');
-Router::get('adminapp/edituser',           'AdminAppController/editUser');
-Router::post('adminapp/updateuser',        'AdminAppController/updateUser');
-Router::get('adminapp/destroyuser',        'AdminAppController/destroyUser');
+Router::resource('user', 'UserController');
 
 //Aeroportos
-Router::get('adminapp/geriraeroportos',         'AdminAppController/gerirAeroportos');
-Router::get('adminapp/createaeroporto',         'AdminAppController/createAeroporto');
-Router::post('adminapp/storeaeroporto',         'AdminAppController/storeAeroporto');
-Router::get('adminapp/editaeroporto',           'AdminAppController/editAeroporto');
-Router::post('adminapp/updateaeroporto',        'AdminAppController/updateAeroporto');
-Router::get('adminapp/destroyaeroporto',        'AdminAppController/destroyAeroporto');
+Router::resource('aeroporto','AeroportoController');
 
 // ** PassageiroAppController **
 

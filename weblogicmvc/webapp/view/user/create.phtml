@@ -3,29 +3,27 @@ use ArmoredCore\WebObjects\ErrMgr;
 use ArmoredCore\WebObjects\Layout;
 use ArmoredCore\WebObjects\URL;
 
-Layout::includeLayout('headeradmin') ?>
-<?php $user = Data::get('user') ?>
+Layout::includeLayout('adminappheader') ?>
+<?php $user = Data::get('user')?>
 <?php ErrMgr::attach($user) ?>
 
-	<!-- container -->
-	<div class="container">
 
-		<div class="row">
-			
-			<!-- Article main content -->
-			<article class="col-xs-12 maincontent">
-				<header class="page-header">
-					<h1 class="page-title">Editar Utilizador</h1>
-				</header>
-				
+    <!-- container -->
+    <div class="container">
 
-					<div class="panel panel-default">
-						<div class="panel-body">
+        <div class="row">
 
+            <!-- Article main content -->
+            <article class="col-xs-12 maincontent">
+                <header class="page-header">
+                    <h1 class="page-title">Novo Utilizador</h1>
+                </header>
+
+                <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
                             <hr>
-
-							<form class="form-horizontal" method="post" action="<?=Url::toRoute('adminapp/updateuser', $user->id)?>">
-
+                            <form method="post" action="<?=Url::toRoute('user/store')?>">
                                 <div class="top-margin">
                                     <label>Username <span class="text-danger">*</span></label>
                                     <input type="text" value="<?=$user->username?>" name="username" class="form-control" placeholder="Indique o Username">
@@ -69,22 +67,33 @@ Layout::includeLayout('headeradmin') ?>
                                     <?= ErrMgr::bind('role') ?>
                                 </div>
 
-								<hr>
+                                <div class="top-margin">
+                                    <label>Password <span class="text-danger">*</span></label>
+                                    <input type="password" value="<?=$user->password?>" name="password" class="form-control" placeholder="Indique a Password">
+                                    <?= ErrMgr::bind('password') ?>
+                                </div>
 
-									<div class="col-lg-4 text-right">
-										<button class="btn btn-default" type="submit">Salvar</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
+                                <hr>
 
+                                <div class="col-lg-5 text-right">
+                                    <button class="btn btn-action" type="submit">Novo</button>
+                                </div>
+                                <div class="col-lg-5 text-right">
+                                    <a href="<?=Url::toRoute('adminapp/gerirusers')?>">
+                                        <button class="btn btn-danger" type="button">Cancelar</button>
+                                    </a>
+                                </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
 
-				
-			</article>
-			<!-- /Article -->
+        </div>
 
-		</div>
-	</div>	<!-- /container -->
+        </article>
+        <!-- /Article -->
+
+    </div>
+    </div>	<!-- /container -->
 
 <?php Layout::includeLayout('footer') ?>

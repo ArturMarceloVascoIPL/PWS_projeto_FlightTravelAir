@@ -2,14 +2,14 @@
 use ArmoredCore\WebObjects\Layout;
 use ArmoredCore\WebObjects\URL;
 
-Layout::includeLayout('headeradmin') ?>
+Layout::includeLayout('adminappheader') ?>
 <?php $users = Data::get('users') ?>
 
     <!-- container -->
     <div class="container">
 
         <ol class="breadcrumb">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="<?=Url::toRoute('adminapp/index')?>">Home</a></li>
             <li class="active">Gerir Utilizadores</li>
         </ol>
 
@@ -29,8 +29,8 @@ Layout::includeLayout('headeradmin') ?>
                         <td><?=$user->telefone?></td>
                         <td><?=$user->role?></td>
                     <td>
-                        <a href="<?=Url::toRoute('adminapp/edituser', $user->id)?>" class="btn btn-info" role="button">Edit</a>
-                        <a href="<?=Url::toRoute('adminapp/destroyuser', $user->id)?>" class="btn btn-warning" role="button">Delete</a>
+                        <a href="<?=Url::toRoute('user/edit', $user->id)?>" class="btn btn-info" role="button">Edit</a>
+                        <a href="<?=Url::toRoute('user/destroy', $user->id)?>" class="btn btn-warning" role="button">Delete</a>
                     </td>
                     </tr>
                 <?php } ?>
@@ -43,7 +43,7 @@ Layout::includeLayout('headeradmin') ?>
             <div class="col-sm-6">
                 <h3>Criar um novo utilizador</h3>
                 <p>
-                    <a href="<?=Url::toRoute('adminapp/createuser')?>" class="btn btn-info" role="button">Novo</a>
+                    <a href="<?=Url::toRoute('user/create')?>" class="btn btn-info" role="button">Novo</a>
                 </p>
             </div>
         </div> <!-- /row -->

@@ -6,10 +6,21 @@ use ArmoredCore\WebObjects\Redirect;
 
 class AdminAppController extends BaseAuthController
 {
+    /** @var UserController */
+    private $userController;
+    /** @var AeroportoController */
+    private $aeroportoController;
+
+    public function __construct()
+    {
+        $this->userController = new UserController($this);
+        $this->aeroportoController = new AeroportoController($this);
+    }
+
     public function index()
     {
         $this->loginFilterByRole('admin');
-        $users = User::all();
+        $users = User::all(array('conditions' => array('role != ?','passageiro')));
         $aeroportos = Aeroporto::all();
         return View::make('admin.index', ['users' => $users, 'aeroportos' => $aeroportos]);
     }
@@ -18,126 +29,63 @@ class AdminAppController extends BaseAuthController
 
     public function gerirUsers()
     {
-        $this->loginFilterByRole('admin');
-        //return View::make('admin.gerirusers');
-        $users = User::all(array('conditions' => array('role != ?','passageiro')));
-        return View::make('admin.gerirusers', ['users' => $users]);
+        return $this->userController->gerirUsers();
     }
 
     public function createUser()
     {
-        return View::make('admin.createuser');
+        return $this->userController->createUser();
     }
 
     public function storeUser()
     {
-        //create new resource (activerecord/model) instance with data from POST
-        //your form name fields must match the ones of the table fields
-        $user = new User(Post::getAll());
-
-        if($user->is_valid()){
-            $user->save();
-            Redirect::toRoute('adminapp/gerirusers');
-        } else {
-            //redirect to form with data and errors
-            Redirect::flashToRoute('adminapp/createuser', ['user' => $user]);
-        }
+        $this->userController->storeUser();
     }
 
     public function editUser($id)
     {
-        $user = User::find([$id]);
-
-        if (is_null($user)) {
-            //TODO redirect to standard error page
-        } else {
-            return View::make('admin.edituser', ['user' => $user]);
-        }
+        return $this->userController->editUser($id);
     }
 
     public function updateUser($id)
     {
-        //find resource (activerecord/model) instance where PK = $id
-        //your form name fields must match the ones of the table fields
-        $user = User::find([$id]);
-        $user->update_attributes(Post::getAll());
-
-        if($user->is_valid()){
-            $user->save();
-            Redirect::toRoute('adminapp/gerirusers');
-        } else {
-            //redirect to form with data and errors
-            Redirect::flashToRoute('adminapp/edituser', ['users' => $user]);
-        }
+        $this->userController->updateUser($id);
     }
 
     public function destroyUser($id)
     {
-        $user = User::find([$id]);
-        $user->delete();
-        Redirect::toRoute('adminapp/gerirusers');
+        $this->userController->destroyUser($id);
     }
 
     // ** Aeroportos **
 
     public function gerirAeroportos()
     {
-        $this->loginFilterByRole('admin');
-        $aeroportos = Aeroporto::all();
-        return View::make('admin.geriraeroportos', ['aeroportos' => $aeroportos]);
+        return $this->aeroportoController->gerirAeroportos();
     }
 
     public function createAeroporto()
     {
-        return View::make('admin.createaeroporto');
+        return $this->aeroportoController->createAeroporto();
     }
 
     public function storeAeroporto()
     {
-        //create new resource (activerecord/model) instance with data from POST
-        //your form name fields must match the ones of the table fields
-        $aeroporto = new Aeroporto(Post::getAll());
-
-        if($aeroporto->is_valid()){
-            $aeroporto->save();
-            Redirect::toRoute('adminapp/geriraeroportos');
-        } else {
-            //redirect to form with data and errors
-            Redirect::flashToRoute('adminapp/createaeroporto', ['aeroporto' => $aeroporto]);
-        }
+        $this->aeroportoController->storeAeroporto();
     }
 
     public function editAeroporto($idaeroporto)
     {
-        $aeroporto = Aeroporto::find([$idaeroporto]);
-
-        if (is_null($aeroporto)) {
-            //TODO redirect to standard error page
-        } else {
-            return View::make('admin.editaeroporto', ['aeroporto' => $aeroporto]);
-        }
+        return $this->aeroportoController->editAeroporto($idaeroporto);
     }
 
     public function updateAeroporto($idaeroporto)
     {
-        //find resource (activerecord/model) instance where PK = $id
-        //your form name fields must match the ones of the table fields
-        $aeroporto = Aeroporto::find([$idaeroporto]);
-        $aeroporto->update_attributes(Post::getAll());
-
-        if($aeroporto->is_valid()){
-            $aeroporto->save();
-            Redirect::toRoute('adminapp/geriraeroportos');
-        } else {
-            //redirect to form with data and errors
-            Redirect::flashToRoute('adminapp/editaeroportos', ['aeroporto' => $aeroporto]);
-        }
+        $this->aeroportoController->updateAeroporto($idaeroporto);
     }
 
     public function destroyAeroporto($idaeroporto)
     {
-        $aeroporto = Aeroporto::find([$idaeroporto]);
-        $aeroporto->delete();
-        Redirect::toRoute('adminapp/geriraeroportos');
+        $this->aeroportoController->destroyAeroporto($idaeroporto);
     }
 }

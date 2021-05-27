@@ -2,14 +2,14 @@
 use ArmoredCore\WebObjects\Layout;
 use ArmoredCore\WebObjects\URL;
 
-Layout::includeLayout('headeradmin') ?>
+Layout::includeLayout('adminappheader') ?>
 <?php $aeroportos = Data::get('aeroportos') ?>
 
     <!-- container -->
     <div class="container">
 
         <ol class="breadcrumb">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="<?=Url::toRoute('adminapp/index')?>">Home</a></li>
             <li class="active">Gerir Aeroportos</li>
         </ol>
 
@@ -25,8 +25,8 @@ Layout::includeLayout('headeradmin') ?>
                     <td><?=$aeroporto->nome?></td>
                     <td><?=$aeroporto->localizacao?></td>
                     <td>
-                        <a href="<?=Url::toRoute('adminapp/editaeroporto', $aeroporto->idaeroporto)?>" class="btn btn-info" role="button">Editar</a>
-                        <a href="<?=Url::toRoute('adminapp/destroyaeroporto', $aeroporto->idaeroporto)?>" class="btn btn-warning" role="button">Apagar</a>
+                        <a href="<?=Url::toRoute('aeroporto/edit', $aeroporto->idaeroporto)?>" class="btn btn-info" role="button">Editar</a>
+                        <a href="<?=Url::toRoute('aeroporto/destroy', $aeroporto->idaeroporto)?>" class="btn btn-warning" role="button">Apagar</a>
                     </td>
                     </tr>
                 <?php } ?>
@@ -39,7 +39,7 @@ Layout::includeLayout('headeradmin') ?>
             <div class="col-sm-6">
                 <h3>Criar novo Aeroporto</h3>
                 <p>
-                    <a href="<?=Url::toRoute('adminapp/createaeroporto')?>" class="btn btn-info" role="button">Novo</a>
+                    <a href="<?=Url::toRoute('aeroporto/create')?>" class="btn btn-info" role="button">Novo</a>
                 </p>
             </div>
         </div> <!-- /row -->
