@@ -52,6 +52,7 @@ Router::get('opcheckinapp/index', 'OpCheckinAppController/index');
 // ** GestorVooAppController **
 
 Router::get('gestorvooapp/index', 'GestorVooAppController/index');
+Router::get('gestorvooapp/index', 'AviaoController/index');
 
 
 /************** End of URLEncoder Routing Rules ************************************/

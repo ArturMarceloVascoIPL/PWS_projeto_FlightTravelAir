@@ -1,6 +1,6 @@
 <?php
 
-class Voo extends \ActiveRecord\Model
+class Escala extends \ActiveRecord\Model
 {
     // static $validates_presence_of = array(
     //     array('referencia', 'message' => 'Campo de preenchimento obrigatório'), 
@@ -20,4 +20,5 @@ class Voo extends \ActiveRecord\Model
     // static $validates_inclusion_of = array(
     //     array('role', 'in' => array('gestorvoo','admin'))
     //   );
+      
 }
