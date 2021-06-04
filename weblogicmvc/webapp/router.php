@@ -20,15 +20,15 @@ use ArmoredCore\Facades\Router;
 
 Router::get('/',            'HomeController/index');
 Router::get('home/',        'HomeController/index');
-Router::get('home/index',    'HomeController/index');
-Router::get('home/start',    'HomeController/start');
+Router::get('home/index',   'HomeController/index');
+Router::get('home/start',   'HomeController/start');
 
 // LoginController
 
 Router::get('login/login',          'LoginController/getLoginForm');
 Router::get('login/registration',   'LoginController/getRegistrationForm');
 Router::get('login/logout',         'LoginController/destroySession');
-Router::post('login/doregistration', 'LoginController/doRegistration');
+Router::post('login/doregistration','LoginController/doRegistration');
 Router::post('login/dologin',       'LoginController/doLogin');
 
 //*********************** Rotas Protegidas ***********************
@@ -43,20 +43,22 @@ Router::resource('user', 'UserController');
 //Aeroportos
 Router::resource('aeroporto', 'AeroportoController');
 
-// ** PassageiroAppController **
+// ** GestorVooAppController **
 
-Router::get('passageiroapp/index', 'PassageiroAppController/index');
+Router::get('gestorvooapp/index', 'GestorVooAppController/index');
+
+//Voos
+Router::resource('voo', 'VooController');
+
+//Escalas
+Router::resource('escala', 'EscalaController');
 
 // ** OpCheckinAppController **
 
 Router::get('opcheckinapp/index', 'OpCheckinAppController/index');
 
-// ** GestorVooAppController **
+// ** PassageiroAppController **
 
-Router::get('gestorvooapp/index', 'GestorVooAppController/index');
-
-//Voos  
-Router::resource('voo', 'VooController');
-
+Router::get('passageiroapp/index', 'PassageiroAppController/index');
 
 /************** End of URLEncoder Routing Rules ************************************/

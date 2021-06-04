@@ -1,0 +1,106 @@
+<?php
+
+use ArmoredCore\WebObjects\Data;
+use ArmoredCore\WebObjects\ErrMgr;
+use ArmoredCore\WebObjects\Layout;
+use ArmoredCore\WebObjects\URL;
+
+Layout::includeLayout('headergestorvoo'); ?>
+<?php
+$escala = Data::get('escala');
+$aeroportos = Data::get('aeroportos')
+?>
+<?php ErrMgr::attach($escala) ?>
+
+<!-- container -->
+<div class="container">
+
+    <div class="row">
+
+        <!-- Article main content -->
+        <article class="col-xs-12 maincontent">
+            <header class="page-header">
+                <h1 class="page-title">Nova Escala</h1>
+            </header>
+
+            <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <hr>
+                        <form method="post" action="<?= Url::toRoute('escala/store') ?>">
+
+                            <div class="top-margin">
+                                <label>Aeroporto de Origem <span class="text-danger">*</span></label>
+                                <select name="idaeroportoorigem">
+                                    <?php
+                                    foreach ($aeroportos as $aeroporto) {
+                                        echo '<option value="<?=$aeroporto->idaeroporto?>">'. $aeroporto->nome .'</option>';
+                                    }
+                                    ?>
+                                </select>
+                                <?= ErrMgr::bind('idaeroportoorigem') ?>
+                            </div>
+
+                            <div class="top-margin">
+                                <label>Data e Hora de Origem <span class="text-danger">*</span></label>
+                                <input type="datetime-local" value="<?= $escala->datahoraorigem ?>" name="datahoraorigem"
+                                       class="form-control">
+                                <?= ErrMgr::bind('datahoraorigem') ?>
+                            </div>
+
+                            <div class="top-margin">
+                                <label>Aeroporto de Destino <span class="text-danger">*</span></label>
+                                <select name="idaeroportodestino">
+                                    <?php
+                                    foreach ($aeroportos as $aeroporto) {
+                                        echo '<option value="<?=$aeroporto->idaeroporto?>">'. $aeroporto->nome .'</option>';
+                                    }
+                                    ?>
+                                </select>
+                                <?= ErrMgr::bind('idaeroportodestino') ?>
+                            </div>
+
+                            <div class="top-margin">
+                                <label>Data e Hora de Destino <span class="text-danger">*</span></label>
+                                <input type="datetime-local" value="<?= $escala->datahoradestino ?>" name="datahoradestino"
+                                       class="form-control">
+                                <?= ErrMgr::bind('datahoradestino') ?>
+                            </div>
+
+                            <div class="top-margin">
+                                <label>Distancia <span class="text-danger">*</span></label>
+                                <input type="text" value="<?= $escala->distancia ?>" name="distancia"
+                                       class="form-control" placeholder="Distancia da Viagem">
+                                <?= ErrMgr::bind('distancia') ?>
+                            </div>
+
+                            <div class="top-margin">
+                                <label>Ordem da Escala <span class="text-danger">*</span></label>
+                                <input type="text" value="<?= $escala->ordemescala ?>" name="ordemescala"
+                                       class="form-control" placeholder="Ordem da Escala">
+                                <?= ErrMgr::bind('ordemescala') ?>
+                            </div>
+
+                            <hr>
+
+                            <div class="col-lg-5 text-right">
+                                <button class="btn btn-action" type="submit">Nova</button>
+                            </div>
+                            <div class="col-lg-5 text-right">
+                                <a href="<?= Url::toRoute('escala/index') ?>">
+                                    <button class="btn btn-danger" type="button">Cancelar</button>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    </article>
+    <!-- /Article -->
+
+</div>
+</div> <!-- /container -->
+
+<?php Layout::includeLayout('footer') ?>

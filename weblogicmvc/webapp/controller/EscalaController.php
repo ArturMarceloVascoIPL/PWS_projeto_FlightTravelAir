@@ -1,78 +1,87 @@
 <?php
-use ArmoredCore\WebObjects\Debug;
+
 use ArmoredCore\WebObjects\Post;
-use ArmoredCore\WebObjects\View; 
+use ArmoredCore\WebObjects\View;
 use ArmoredCore\WebObjects\Redirect;
 use ArmoredCore\Interfaces\ResourceControllerInterface;
 
-class EscalaController extends BaseAuthController implements ResourceControllerInterface
+class EscalaController extends BaseAuthController
 {
     public function index()
     {
         $this->loginFilterByRole('gestorvoo');
-        return View::make('gestorvoo.index');
+
+        $escalas = Escala::all();
+        return View::make('escala.index', ['escalas' => $escalas]);
+    }
+
+    public function show($id)
+    {
+        $this->loginFilterByRole('gestorvoo');
+
+        return $this->index();
     }
 
     public function create()
     {
         $this->loginFilterByRole('gestorvoo');
-        return View::make('gestorvoo.create');
+
+        $aeroportos = Aeroporto::all();
+        return View::make('escala.create', ['aeroportos' => $aeroportos]);
     }
 
     public function store()
     {
+        $this->loginFilterByRole('gestorvoo');
+
         //create new resource (activerecord/model) instance with data from POST
         //your form name fields must match the ones of the table fields
-        $user = new User(Post::getAll());
-
-        if($escala->is_valid()){
+        $escala = new Escala(Post::getAll());
+        if ($escala->is_valid()) {
             $escala->save();
-            Redirect::toRoute('gestorvooapp/gerirusers');
+            Redirect::toRoute('escala/index');
         } else {
             //redirect to form with data and errors
-            Redirect::flashToRoute('gestorvooapp/create', ['escala' => $escala]);
+            Redirect::flashToRoute('escala/create', ['escala' => $escala]);
         }
-    }
-
-    public function show($id)
-    {
-        return $this->index();
     }
 
     public function edit($idescala)
     {
         $this->loginFilterByRole('gestorvoo');
-        $escala = Escala::find([$idescala]);
 
+        $escala = Escala::find([$idescala]);
         if (is_null($escala)) {
             //TODO redirect to standard error page
         } else {
-            return View::make('gestorvoo.edit', ['escala' => $escala]);
+            return View::make('escala.edit', ['escala' => $escala]);
         }
     }
 
     public function update($idescala)
     {
+        $this->loginFilterByRole('gestorvoo');
+
         //find resource (activerecord/model) instance where PK = $id
         //your form name fields must match the ones of the table fields
         $escala = Escala::find([$idescala]);
         $escala->update_attributes(Post::getAll());
 
-        if($escala->is_valid()){
+        if ($escala->is_valid()) {
             $escala->save();
-            Redirect::toRoute('gestorvooapp/index');
+            Redirect::toRoute('escala/index');
         } else {
             //redirect to form with data and errors
-            Redirect::flashToRoute('gestorvooapp/edit', ['escala' => $escala]);
+            Redirect::flashToRoute('escala/edit', ['escala' => $escala]);
         }
     }
 
     public function destroy($idescala)
     {
+        $this->loginFilterByRole('gestorvoo');
+
         $escala = Escala::find([$idescala]);
         $escala->delete();
-        Redirect::toRoute('gestorvooapp/index');
+        Redirect::toRoute('escala/index');
     }
 }
-
-?>

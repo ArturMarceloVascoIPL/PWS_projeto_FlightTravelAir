@@ -17,14 +17,14 @@ Layout::includeLayout('headergestorvoo'); ?>
         <!-- Article main content -->
         <article class="col-xs-12 maincontent">
             <header class="page-header">
-                <h1 class="page-title">Novo Voo</h1>
+                <h1 class="page-title">Editar Preco</h1>
             </header>
 
             <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <hr>
-                        <form method="post" action="<?= Url::toRoute('voo/store') ?>">
+                        <form method="post" action="<?= Url::toRoute('voo/update', $voo->idvoo) ?>">
                             <div class="top-margin">
                                 <label>Preco de Venda <span class="text-danger">*</span></label>
                                 <input type="text" value="<?= $voo->precovenda ?>" name="precovenda"
@@ -34,7 +34,7 @@ Layout::includeLayout('headergestorvoo'); ?>
                             <hr>
 
                             <div class="col-lg-5 text-right">
-                                <button class="btn btn-action" type="submit">Novo</button>
+                                <button class="btn btn-action" type="submit">Guardar</button>
                             </div>
                             <div class="col-lg-5 text-right">
                                 <a href="<?= Url::toRoute('voo/index') ?>">

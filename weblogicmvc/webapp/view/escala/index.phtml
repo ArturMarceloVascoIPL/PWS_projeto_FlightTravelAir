@@ -1,0 +1,76 @@
+﻿<?php
+
+use ArmoredCore\WebObjects\URL;
+use ArmoredCore\WebObjects\Data;
+use ArmoredCore\WebObjects\Layout;
+
+Layout::includeLayout('headergestorvoo'); ?>
+<?php
+$escalas = Data::get('escalas');
+?>
+
+<!-- container  Aviões -->
+<div class="container">
+
+    <ol class="breadcrumb">
+        <li><a href="<?= Url::toRoute('gestorvooapp/index') ?>">Home</a></li>
+        <li class="active">Gerir Escalas</li>
+    </ol>
+
+    <h2 class="text-left top-space">Lista de Escalas</h2>
+    <h2 class="top-space"></h2>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-striped">
+                <thead>
+                    <th>
+                        <h3>Id</h3>
+                    </th>
+                    <th>
+                        <h3>Ordem da Escala</h3>
+                    </th>
+                    <th>
+                        <h3>Data e Hora do Destino</h3>
+                    </th>
+                    <th>
+                        <h3>Data e Hora da Origem</h3>
+                    </th>
+                    <th>
+                        <h3>Distancia</h3>
+                    </th>
+                    <th>
+                        <h3>Opcoes</h3>
+                    </th>
+                </thead>
+                <tbody>
+                    <?php foreach ($escalas as $escala) { ?>
+                    <tr>
+                        <td><?= $escala->idescala ?></td>
+                        <td><?= $escala->ordermescala ?></td>
+                        <td><?= $escala->datahoradestino ?></td>
+                        <td><?= $escala->datahoraorigem ?></td>
+                        <td><?= $escala->distancia ?></td>
+                        <td>
+                            <a href="<?= Url::toRoute('escala/edit', $escala->idescala) ?>" class="btn btn-info"
+                               role="button">Editar</a>
+                            <a href="<?= Url::toRoute('escala/destroy', $escala->idescala) ?>" class="btn btn-warning"
+                               role="button">Apagar</a>
+                            <a href="<?= Url::toRoute('escala/edit', $escala->idescala) ?>" class="btn"
+                               role="button">Escolher Aviao</a>
+                        </td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+            <div class="col-sm-6">
+                <h3>Criar nova Escala</h3>
+                <p>
+                    <a href="<?= Url::toRoute('escala/create') ?>" class="btn btn-info" role="button">Nova</a>
+                </p>
+            </div>
+        </div>
+    </div> <!-- /row -->
+</div>
+<!-- /container -->
+
+<?php Layout::includeLayout('footer') ?>
