@@ -6,7 +6,7 @@ use ArmoredCore\WebObjects\Layout;
 
 Layout::includeLayout('headergestorvoo'); ?>
 <?php
-    $avioes = Data::get('aviao');
+    // $voos = Data::get('voos');
 ?>
 
 <!-- Header -->
@@ -23,43 +23,6 @@ Layout::includeLayout('headergestorvoo'); ?>
 
 <!-- container  Aviões -->
 <div class="container">
-    <h2 class="text-left top-space">Lista de Aviões</h2>
-    <div class="row">
-        <div class="col-sm-12">
-            <table class="table table-striped">
-                <thead>
-                    <th>
-                        <h3>Id</h3>
-                    </th>
-                    <th>
-                        <h3>Referencia</h3>
-                    </th>
-                    <th>
-                        <h3>Lotacao</h3>
-                    </th>
-                    <th>
-                        <h3>Tipo Avião</h3>
-                    </th>
-                </thead>
-                <tbody>
-                    <?php foreach ($avioes as $aviao) { ?>
-                    <tr>
-                        <td><?=$aviao->$idaviao?></td>
-                        <td><?=$aviao->$referencia?></td>
-                        <td><?=$aviao->$lotacao?></td>
-                        <td><?=$aviao->$tipoaviao?></td>
-                    </tr>
-                    <?php } ?>
-
-                </tbody>
-            </table>
-        </div>
-    </div> <!-- /row -->
-</div>
-<!-- /container -->
-
-<!-- container Voos -->
-<div class="container">
     <h2 class="text-left top-space">Lista de Voos</h2>
     <div class="row">
         <div class="col-sm-12">
@@ -68,52 +31,11 @@ Layout::includeLayout('headergestorvoo'); ?>
                     <th>
                         <h3>Id</h3>
                     </th>
-                    <th>
-                        <h3>Nome</h3>
-                    </th>
-                    <th>
-                        <h3>Localização</h3>
-                    </th>
                 </thead>
                 <tbody>
-                    <?php  /*foreach ($aeroportos as $aeroporto) { ?>
+                    <?php /*foreach ($voos as $voo) { ?>
                     <tr>
-                        <td><?=$aeroporto->idaeroporto?></td>
-                        <td><?=$aeroporto->nome?></td>
-                        <td><?=$aeroporto->localizacao?></td>
-                    </tr>
-                    <?php } */?>
-
-                </tbody>
-            </table>
-        </div>
-    </div> <!-- /row -->
-</div>
-<!-- /container -->
-
-<!-- container Escalas -->
-<div class="container">
-    <h2 class="text-left top-space">Lista de Escalas</h2>
-    <div class="row">
-        <div class="col-sm-12">
-            <table class="table table-striped">
-                <thead>
-                    <th>
-                        <h3>Id</h3>
-                    </th>
-                    <th>
-                        <h3>Nome</h3>
-                    </th>
-                    <th>
-                        <h3>Localização</h3>
-                    </th>
-                </thead>
-                <tbody>
-                    <?php  /*foreach ($aeroportos as $aeroporto) { ?>
-                    <tr>
-                        <td><?=$aeroporto->idaeroporto?></td>
-                        <td><?=$aeroporto->nome?></td>
-                        <td><?=$aeroporto->localizacao?></td>
+                        <td><?=$voo->$idvoo?></td>
                     </tr>
                     <?php } */?>
 
