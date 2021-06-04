@@ -39,21 +39,8 @@ CREATE TABLE `aeroportos` (
 -- Criar a tabela "voo"
 CREATE TABLE `voos` (
 	`idvoo` INT NOT NULL AUTO_INCREMENT,
-	`idpaeroporto` INT NOT NULL,
     `precovenda` VARCHAR(10) NOT NULL,
-    PRIMARY KEY (`idvoo`),
-    FOREIGN KEY (`idpaeroporto`) REFERENCES `aeroportos`(`idaeroporto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Criar a tabela "vooaviao"
-CREATE TABLE `voosavioes` (
-	`idvooaviao` INT NOT NULL AUTO_INCREMENT,
-    `idvoo` INT NOT NULL,
-    `idaviao` INT NOT NULL,
-    `passagensvendidas` VARCHAR(10) NOT NULL,
-    PRIMARY KEY (`idvooaviao`),
-    FOREIGN KEY (`idvoo`) REFERENCES `voos`(`idvoo`),
-    FOREIGN KEY (`idaviao`) REFERENCES `avioes`(`idaviao`)
+    PRIMARY KEY (`idvoo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Criar a tabela "passagemvenda"
@@ -80,6 +67,7 @@ CREATE TABLE `escalas` (
     `datahoradestino` DATETIME NOT NULL,
     `datahoraorigem` DATETIME NOT NULL,
     `distancia` VARCHAR(10) NOT NULL,
+	`ordermescala` VARCHAR(10) NOT NULL,
     PRIMARY KEY (`idescala`),
     FOREIGN KEY (`idvoo`) REFERENCES `voos`(`idvoo`),
     FOREIGN KEY (`idaeroportodestino`) REFERENCES `aeroportos`(`idaeroporto`),
@@ -91,7 +79,8 @@ CREATE TABLE `escalasavioes` (
 	`idescalaaviao` INT NOT NULL AUTO_INCREMENT,
     `idescala` INT NOT NULL,
     `idaviao` INT NOT NULL,
-    `numeropassageiros` VARCHAR(10) NOT NULL,
+    `numeropassageiroscheckin` VARCHAR(10) NOT NULL,
+    `numerobilhetesvendidos` VARCHAR(10) NOT NULL,
     PRIMARY KEY (`idescalaaviao`),
     FOREIGN KEY (`idescala`) REFERENCES `escalas`(`idescala`),
     FOREIGN KEY (`idaviao`) REFERENCES `avioes`(`idaviao`)
@@ -122,6 +111,5 @@ INSERT INTO `flightairdb`.`users`
 (`nome`, `morada`, `email`, `nif`, `telefone`, `username`, `password`, `role`)
 VALUES
 ('passageiroTeste', 'moradaTeste', 'email@teste.com', '123456789', '987654321', 'passageiro', 'passageiro', 'passageiro');
-
 
 
