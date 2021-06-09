@@ -58,13 +58,13 @@ $idvoo = Data::get('idvoo');
                         <td><?= $escala->horadestino ?></td>
                         <td><?= $escala->dataorigem ?></td>
                         <td><?= $escala->horaorigem ?></td>
-                        <td><?= $escala->distancia ?></td>
+                        <td><?= $escala->distancia ?> Km</td>
                         <td>
-                            <a href="<?= Url::toRoute('escala/edit', $escala->idescala) ?>" class="btn btn-info"
+                            <a href="<?= Url::toRoute('escala/edit', $escala->idescala, $idvoo) ?>" class="btn btn-info"
                                role="button">Editar</a>
-                            <a href="<?= Url::toRoute('escala/destroy', $escala->idescala) ?>" class="btn btn-warning"
+                            <a href="<?= Url::toRoute('escala/destroy', $escala->idescala, $idvoo) ?>" class="btn btn-warning"
                                role="button">Apagar</a>
-                            <a href="<?= Url::toRoute('escala/edit', $escala->idescala) ?>" class="btn btn-success"
+                            <a href="<?= Url::toRoute('aviao/index', $escala->idescala) ?>" class="btn btn-success"
                                role="button">Escolher Aviao</a>
                         </td>
                     </tr>
