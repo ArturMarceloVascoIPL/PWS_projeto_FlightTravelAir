@@ -8,7 +8,8 @@ use ArmoredCore\WebObjects\URL;
 Layout::includeLayout('headergestorvoo'); ?>
 <?php
 $escala = Data::get('escala');
-$aeroportos = Data::get('aeroportos')
+$aeroportos = Data::get('aeroportos');
+$idvoo = Data::get('idvoo');
 ?>
 <?php ErrMgr::attach($escala) ?>
 
@@ -34,7 +35,7 @@ $aeroportos = Data::get('aeroportos')
                                 <select name="idaeroportoorigem">
                                     <?php
                                     foreach ($aeroportos as $aeroporto) {
-                                        echo '<option value="<?=$aeroporto->idaeroporto?>">'. $aeroporto->nome .'</option>';
+                                        echo '<option value="'. $aeroporto->idaeroporto .'">'. $aeroporto->nome .'</option>';
                                     }
                                     ?>
                                 </select>
@@ -42,10 +43,16 @@ $aeroportos = Data::get('aeroportos')
                             </div>
 
                             <div class="top-margin">
-                                <label>Data e Hora de Origem <span class="text-danger">*</span></label>
-                                <input type="datetime-local" value="<?= $escala->datahoraorigem ?>" name="datahoraorigem"
+                                <label>Data de Origem <span class="text-danger">*</span></label>
+                                <input type="date" value="<?= $escala->dataorigem ?>" name="dataorigem"
                                        class="form-control">
-                                <?= ErrMgr::bind('datahoraorigem') ?>
+                                <?= ErrMgr::bind('dataorigem') ?>
+                            </div>
+                            <div class="top-margin">
+                                <label>Hora de Origem <span class="text-danger">*</span></label>
+                                <input type="time" value="<?= $escala->horaorigem ?>" name="horaorigem"
+                                       class="form-control">
+                                <?= ErrMgr::bind('horaorigem') ?>
                             </div>
 
                             <div class="top-margin">
@@ -53,7 +60,7 @@ $aeroportos = Data::get('aeroportos')
                                 <select name="idaeroportodestino">
                                     <?php
                                     foreach ($aeroportos as $aeroporto) {
-                                        echo '<option value="<?=$aeroporto->idaeroporto?>">'. $aeroporto->nome .'</option>';
+                                        echo '<option value="'. $aeroporto->idaeroporto .'">'. $aeroporto->nome .'</option>';
                                     }
                                     ?>
                                 </select>
@@ -61,10 +68,16 @@ $aeroportos = Data::get('aeroportos')
                             </div>
 
                             <div class="top-margin">
-                                <label>Data e Hora de Destino <span class="text-danger">*</span></label>
-                                <input type="datetime-local" value="<?= $escala->datahoradestino ?>" name="datahoradestino"
+                                <label>Data de Destino <span class="text-danger">*</span></label>
+                                <input type="date" value="<?= $escala->datadestino ?>" name="datadestino"
                                        class="form-control">
-                                <?= ErrMgr::bind('datahoradestino') ?>
+                                <?= ErrMgr::bind('datadestino') ?>
+                            </div>
+                            <div class="top-margin">
+                                <label>Hora de Destino <span class="text-danger">*</span></label>
+                                <input type="time" value="<?= $escala->horadestino ?>" name="horadestino"
+                                       class="form-control">
+                                <?= ErrMgr::bind('horadestino') ?>
                             </div>
 
                             <div class="top-margin">

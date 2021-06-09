@@ -7,6 +7,8 @@ class GestorVooAppController extends BaseAuthController
     public function index()
     {
         $this->loginFilterByRole('gestorvoo');
-        return View::make('gestorvoo.index');
+
+        $voos = Voo::all();
+        return View::make('gestorvoo.index', ['voos' => $voos]);
     }
 }

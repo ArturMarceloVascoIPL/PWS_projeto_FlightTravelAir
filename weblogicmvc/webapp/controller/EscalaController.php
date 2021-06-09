@@ -7,12 +7,12 @@ use ArmoredCore\Interfaces\ResourceControllerInterface;
 
 class EscalaController extends BaseAuthController
 {
-    public function index()
+    public function index($idvoo)
     {
         $this->loginFilterByRole('gestorvoo');
 
-        $escalas = Escala::all();
-        return View::make('escala.index', ['escalas' => $escalas]);
+        $escalas = Escala::all(array('conditions' => array('idvoo = ?', $idvoo)));
+        return View::make('escala.index', ['escalas' => $escalas, 'idvoo' => $idvoo]);
     }
 
     public function show($id)
@@ -22,12 +22,12 @@ class EscalaController extends BaseAuthController
         return $this->index();
     }
 
-    public function create()
+    public function create($idvoo)
     {
         $this->loginFilterByRole('gestorvoo');
 
         $aeroportos = Aeroporto::all();
-        return View::make('escala.create', ['aeroportos' => $aeroportos]);
+        return View::make('escala.create', ['aeroportos' => $aeroportos, 'idvoo' => $idvoo]);
     }
 
     public function store()
