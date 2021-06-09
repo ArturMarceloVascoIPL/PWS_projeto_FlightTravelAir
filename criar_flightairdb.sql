@@ -20,7 +20,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Criar a tabela "aviao"
-CREATE TABLE `avioes` (
+CREATE TABLE `aviaos` (
 	`idaviao` INT NOT NULL AUTO_INCREMENT,
     `referencia` VARCHAR(9) NOT NULL,
     `lotacao` INT NOT NULL,
@@ -85,7 +85,7 @@ CREATE TABLE `escalasavioes` (
     `numerobilhetesvendidos` VARCHAR(10) NOT NULL,
     PRIMARY KEY (`idescalaaviao`),
     FOREIGN KEY (`idescala`) REFERENCES `escalas`(`idescala`),
-    FOREIGN KEY (`idaviao`) REFERENCES `avioes`(`idaviao`)
+    FOREIGN KEY (`idaviao`) REFERENCES `aviaos`(`idaviao`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /* Inserir dados de teste na tabela "users" */
