@@ -70,6 +70,7 @@ CREATE TABLE `escalas` (
     `horadestino` TIME NOT NULL,
     `distancia` VARCHAR(10) NOT NULL,
 	`ordemescala` VARCHAR(10) NOT NULL,
+    `precoescala` VARCHAR(10) NOT NULL,
     PRIMARY KEY (`idescala`),
     FOREIGN KEY (`idvoo`) REFERENCES `voos`(`idvoo`),
     FOREIGN KEY (`idaeroportodestino`) REFERENCES `aeroportos`(`idaeroporto`),
@@ -115,3 +116,22 @@ VALUES
 ('passageiroTeste', 'moradaTeste', 'email@teste.com', '123456789', '987654321', 'passageiro', 'passageiro', 'passageiro');
 
 
+/* Inserir dados de teste na tabela "aeroportos" */
+
+-- Aeroporto 1
+INSERT INTO `flightairdb`.`aeroportos`
+(`nome`, `localizacao`)
+VALUES
+('Aeroporto de Leiria', 'Leiria');
+
+-- Aeroporto 2
+INSERT INTO `flightairdb`.`aeroportos`
+(`nome`, `localizacao`)
+VALUES
+('Aeroporto de Lisboa', 'Lisboa');
+
+-- Aeroporto 1
+INSERT INTO `flightairdb`.`aeroportos`
+(`nome`, `localizacao`)
+VALUES
+('Aeroporto de Alentejo', 'Alentejo');

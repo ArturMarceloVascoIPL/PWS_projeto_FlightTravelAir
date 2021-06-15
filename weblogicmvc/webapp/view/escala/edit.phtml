@@ -102,6 +102,14 @@ ErrMgr::attach($escala);
                                 <?= ErrMgr::bind('ordemescala') ?>
                             </div>
 
+                            <div class="top-margin">
+                                <label>Preço da Escala <span class="text-danger">*</span></label>
+                                <input type="text" value="<?= $escala->precoescala ?>" name="precoescala"
+                                       class="form-control" placeholder="Ordem da Escala">
+                                <?= ErrMgr::bind('precoescala') ?>
+                            </div>
+
+
                             <hr>
 
                             <div class="col-lg-5 text-right">

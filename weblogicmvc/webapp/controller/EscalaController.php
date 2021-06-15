@@ -11,8 +11,8 @@ class EscalaController extends BaseAuthController
     {
         $this->loginFilterByRole('gestorvoo');
 
-        $escalas = Escala::all(array('conditions' => array('idvoo = ?', $idvoo)));
-        return View::make('escala.index', ['escalas' => $escalas, 'idvoo' => $idvoo]);
+        $voos = Voo::find([$idvoo]);
+        return View::make('escala.index', ['escalas' => $voos->escalas, 'idvoo' => $idvoo]);
     }
 
     public function show($id)
@@ -41,8 +41,8 @@ class EscalaController extends BaseAuthController
         if ($escala->is_valid()) {
             $escala->save();
 
-            $escalas = Escala::all(array('conditions' => array('idvoo = ?', $idvoo)));
-            Redirect::toRoute('escala/index', ['idvoo' => $idvoo]);
+            //Redirect::toRoute('escala/index', ['idvoo' => $idvoo]);
+            $this->index($idvoo);
         } else {
             //redirect to form with data and errors
             Redirect::flashToRoute('escala/create', ['escala' => $escala, 'idvoo' => $idvoo]);

@@ -31,10 +31,16 @@ $idvoo = Data::get('idvoo');
                         <h3>Ordem da Escala</h3>
                     </th>
                     <th>
+                        <h3>Aeroporto Destino</h3>
+                    </th>
+                    <th>
                         <h3>Data do Destino</h3>
                     </th>
                     <th>
                         <h3>Hora do Destino</h3>
+                    </th>
+                    <th>
+                        <h3>Aeroporto Origem</h3>
                     </th>
                     <th>
                         <h3>Data da Origem</h3>
@@ -46,7 +52,10 @@ $idvoo = Data::get('idvoo');
                         <h3>Distancia</h3>
                     </th>
                     <th>
-                        <h3>Opcoes</h3>
+                        <h3>Preço</h3>
+                    </th>
+                    <th>
+                        <h3>Opções</h3>
                     </th>
                 </thead>
                 <tbody>
@@ -54,11 +63,14 @@ $idvoo = Data::get('idvoo');
                     <tr>
                         <td><?= $escala->idescala ?></td>
                         <td><?= $escala->ordemescala ?></td>
+                        <td><?= $escala->aeroportodestino->nome ?></td>
                         <td><?= $escala->datadestino ?></td>
                         <td><?= $escala->horadestino ?></td>
+                        <td><?= $escala->aeroportoorigem->nome?></td>
                         <td><?= $escala->dataorigem ?></td>
                         <td><?= $escala->horaorigem ?></td>
                         <td><?= $escala->distancia ?> Km</td>
+                        <td><?= $escala->precoescala ?> €</td>
                         <td>
                             <a href="<?= Url::toRoute('escala/edit', $escala->idescala, $idvoo) ?>" class="btn btn-info"
                                role="button">Editar</a>
@@ -75,6 +87,11 @@ $idvoo = Data::get('idvoo');
                 <h3>Criar nova Escala</h3>
                 <p>
                     <a href="<?= Url::toRoute('escala/create', $idvoo) ?>" class="btn btn-info" role="button">Nova</a>
+                </p>
+
+                <h3>Guardar Voo</h3>
+                <p>
+                    <a href="#" class="btn btn-info" role="button">Guardar</a>
                 </p>
             </div>
         </div>
