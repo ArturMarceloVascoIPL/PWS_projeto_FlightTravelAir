@@ -28,7 +28,7 @@ Router::get('home/start',   'HomeController/start');
 Router::get('login/login',          'LoginController/getLoginForm');
 Router::get('login/registration',   'LoginController/getRegistrationForm');
 Router::get('login/logout',         'LoginController/destroySession');
-Router::post('login/doregistration','LoginController/doRegistration');
+Router::post('login/doregistration', 'LoginController/doRegistration');
 Router::post('login/dologin',       'LoginController/doLogin');
 
 //*********************** Rotas Protegidas ***********************
@@ -47,6 +47,9 @@ Router::resource('aeroporto', 'AeroportoController');
 
 Router::get('gestorvooapp/index', 'GestorVooAppController/index');
 
+// Avioes
+Router::resource('aviao', 'AviaoController');
+
 //Voos
 Router::resource('voo', 'VooController');
 
@@ -60,5 +63,6 @@ Router::get('opcheckinapp/index', 'OpCheckinAppController/index');
 // ** PassageiroAppController **
 
 Router::get('passageiroapp/index', 'PassageiroAppController/index');
+
 
 /************** End of URLEncoder Routing Rules ************************************/

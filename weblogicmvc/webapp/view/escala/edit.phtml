@@ -8,10 +8,11 @@ use ArmoredCore\WebObjects\URL;
 Layout::includeLayout('headergestorvoo'); ?>
 <?php
 $escala = Data::get('escala');
-$aeroportos = Data::get('aeroportos');
 $idvoo = Data::get('idvoo');
+$aeroportos = Data::get('aeroportos');
+
+ErrMgr::attach($escala);
 ?>
-<?php ErrMgr::attach($escala) ?>
 
 <!-- container -->
 <div class="container">
@@ -21,14 +22,14 @@ $idvoo = Data::get('idvoo');
         <!-- Article main content -->
         <article class="col-xs-12 maincontent">
             <header class="page-header">
-                <h1 class="page-title">Nova Escala</h1>
+                <h1 class="page-title">Editar Escala</h1>
             </header>
 
             <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <hr>
-                        <form method="post" action="<?= Url::toRoute('escala/store', $idvoo) ?>">
+                        <form method="post" action="<?= Url::toRoute('escala/update', $escala->idescala, $idvoo) ?>">
 
                             <div class="top-margin">
                                 <label>Id do Voo <span class="text-danger">*</span></label>
@@ -102,16 +103,17 @@ $idvoo = Data::get('idvoo');
                             </div>
 
                             <div class="top-margin">
-                                <label>Preço da Escala<span class="text-danger">*</span></label>
+                                <label>Preço da Escala <span class="text-danger">*</span></label>
                                 <input type="text" value="<?= $escala->precoescala ?>" name="precoescala"
                                        class="form-control" placeholder="Ordem da Escala">
                                 <?= ErrMgr::bind('precoescala') ?>
                             </div>
 
+
                             <hr>
 
                             <div class="col-lg-5 text-right">
-                                <button class="btn btn-action" type="submit">Nova</button>
+                                <button class="btn btn-action" type="submit">Guardar</button>
                             </div>
                             <div class="col-lg-5 text-right">
                                 <a href="<?= Url::toRoute('escala/index', $idvoo) ?>">

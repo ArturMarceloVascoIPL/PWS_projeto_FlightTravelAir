@@ -1,0 +1,71 @@
+<?php
+
+use ArmoredCore\WebObjects\Data;
+use ArmoredCore\WebObjects\ErrMgr;
+use ArmoredCore\WebObjects\Layout;
+use ArmoredCore\WebObjects\URL;
+
+Layout::includeLayout('headergestorvoo'); ?>
+<?php $aviao = Data::get('aviao') ?>
+<?php ErrMgr::attach($aviao) ?>
+
+
+<!-- container -->
+<div class="container">
+
+    <!-- row -->
+    <div class="row">
+
+        <!-- Article main content -->
+        <article class="col-xs-12 maincontent">
+
+            <header class="page-header">
+                <h1 class="page-title">Novo Aviao</h1>
+            </header>
+
+            <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <hr>
+                        <form method="post" action="<?= Url::toRoute('aviao/store') ?>">
+                            <div class="top-margin">
+
+                                <label>Referencia <span class="text-danger">*</span></label>
+                                <input type="text" value="<?= $aviao->referencia ?>" name="referencia"
+                                    class="form-control" placeholder="Referencia">
+                                <?= ErrMgr::bind('referencia') ?>
+                            </div>
+
+                            <div class="top-margin">
+                                <label>Lotacao <span class="text-danger">*</span></label>
+                                <input type="text" value="<?= $aviao->lotacao ?>" name="lotacao" class="form-control"
+                                    placeholder="Lotacao do aviao">
+                                <?= ErrMgr::bind('lotacao') ?>
+                            </div>
+
+                            <div class="top-margin">
+                                <label>Tipo Aviao <span class="text-danger">*</span></label>
+                                <input type="text" value="<?= $aviao->tipoaviao  ?>" name="tipoaviao"
+                                    class="form-control" placeholder="Tipo Aviao ">
+                                <?= ErrMgr::bind('tipoaviao') ?>
+                            </div>
+
+                            <hr>
+
+                            <div class="col-lg-5 text-right">
+                                <button class="btn btn-action" type="submit">Novo</button>
+                            </div>
+                            <div class="col-lg-5 text-right">
+                                <a href="<?= Url::toRoute('aviao/index') ?>">
+                                    <button class="btn btn-danger" type="button">Cancelar</button>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article> <!-- /Article -->
+    </div> <!-- /row -->
+</div> <!-- /container -->
+
+<?php Layout::includeLayout('footer') ?>

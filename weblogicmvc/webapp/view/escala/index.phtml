@@ -7,6 +7,7 @@ use ArmoredCore\WebObjects\Layout;
 Layout::includeLayout('headergestorvoo'); ?>
 <?php
 $escalas = Data::get('escalas');
+$idvoo = Data::get('idvoo');
 ?>
 
 <!-- container  Aviões -->
@@ -30,32 +31,52 @@ $escalas = Data::get('escalas');
                         <h3>Ordem da Escala</h3>
                     </th>
                     <th>
-                        <h3>Data e Hora do Destino</h3>
+                        <h3>Aeroporto Destino</h3>
                     </th>
                     <th>
-                        <h3>Data e Hora da Origem</h3>
+                        <h3>Data do Destino</h3>
+                    </th>
+                    <th>
+                        <h3>Hora do Destino</h3>
+                    </th>
+                    <th>
+                        <h3>Aeroporto Origem</h3>
+                    </th>
+                    <th>
+                        <h3>Data da Origem</h3>
+                    </th>
+                    <th>
+                        <h3>Hora da Origem</h3>
                     </th>
                     <th>
                         <h3>Distancia</h3>
                     </th>
                     <th>
-                        <h3>Opcoes</h3>
+                        <h3>Preço</h3>
+                    </th>
+                    <th>
+                        <h3>Opções</h3>
                     </th>
                 </thead>
                 <tbody>
                     <?php foreach ($escalas as $escala) { ?>
                     <tr>
                         <td><?= $escala->idescala ?></td>
-                        <td><?= $escala->ordermescala ?></td>
-                        <td><?= $escala->datahoradestino ?></td>
-                        <td><?= $escala->datahoraorigem ?></td>
-                        <td><?= $escala->distancia ?></td>
+                        <td><?= $escala->ordemescala ?></td>
+                        <td><?= $escala->aeroportodestino->nome ?></td>
+                        <td><?= $escala->datadestino ?></td>
+                        <td><?= $escala->horadestino ?></td>
+                        <td><?= $escala->aeroportoorigem->nome?></td>
+                        <td><?= $escala->dataorigem ?></td>
+                        <td><?= $escala->horaorigem ?></td>
+                        <td><?= $escala->distancia ?> Km</td>
+                        <td><?= $escala->precoescala ?> €</td>
                         <td>
-                            <a href="<?= Url::toRoute('escala/edit', $escala->idescala) ?>" class="btn btn-info"
+                            <a href="<?= Url::toRoute('escala/edit', $escala->idescala, $idvoo) ?>" class="btn btn-info"
                                role="button">Editar</a>
-                            <a href="<?= Url::toRoute('escala/destroy', $escala->idescala) ?>" class="btn btn-warning"
+                            <a href="<?= Url::toRoute('escala/destroy', $escala->idescala, $idvoo) ?>" class="btn btn-warning"
                                role="button">Apagar</a>
-                            <a href="<?= Url::toRoute('escala/edit', $escala->idescala) ?>" class="btn"
+                            <a href="<?= Url::toRoute('aviao/index', $escala->idescala) ?>" class="btn btn-success"
                                role="button">Escolher Aviao</a>
                         </td>
                     </tr>
@@ -65,7 +86,12 @@ $escalas = Data::get('escalas');
             <div class="col-sm-6">
                 <h3>Criar nova Escala</h3>
                 <p>
-                    <a href="<?= Url::toRoute('escala/create') ?>" class="btn btn-info" role="button">Nova</a>
+                    <a href="<?= Url::toRoute('escala/create', $idvoo) ?>" class="btn btn-info" role="button">Nova</a>
+                </p>
+
+                <h3>Guardar Voo</h3>
+                <p>
+                    <a href="#" class="btn btn-info" role="button">Guardar</a>
                 </p>
             </div>
         </div>
