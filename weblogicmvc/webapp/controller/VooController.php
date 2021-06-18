@@ -10,6 +10,7 @@ class VooController extends BaseAuthController implements ResourceControllerInte
     public function index()
     {
         $this->loginFilterByRole('gestorvoo');
+
         $voos = Voo::all();
         return View::make('voo.index', ['voos' => $voos]);
     }
@@ -17,21 +18,24 @@ class VooController extends BaseAuthController implements ResourceControllerInte
     public function show($id)
     {
         $this->loginFilterByRole('gestorvoo');
+
         return $this->index();
     }
 
     public function create()
     {
         $this->loginFilterByRole('gestorvoo');
-        return View::make('voo.create');
+
+        return $this->store();
     }
 
     public function store()
     {
         $this->loginFilterByRole('gestorvoo');
+
         //create new resource (activerecord/model) instance with data from POST
         //your form name fields must match the ones of the table fields
-        $voo = new Voo(Post::getAll());
+        $voo = new Voo(array('precovenda' => '0'));
 
         if ($voo->is_valid()) {
             $voo->save();
@@ -45,6 +49,7 @@ class VooController extends BaseAuthController implements ResourceControllerInte
     public function edit($idvoo)
     {
         $this->loginFilterByRole('gestorvoo');
+
         $voo = Voo::find([$idvoo]);
 
         if (is_null($voo)) {
@@ -56,10 +61,12 @@ class VooController extends BaseAuthController implements ResourceControllerInte
 
     public function update($idvoo)
     {
+        $this->loginFilterByRole('gestorvoo');
+
         //find resource (activerecord/model) instance where PK = $id
         //your form name fields must match the ones of the table fields
-        $this->loginFilterByRole('gestorvoo');
         $voo = Voo::find([$idvoo]);
+
         $voo->update_attributes(Post::getAll());
 
         if ($voo->is_valid()) {
@@ -74,6 +81,7 @@ class VooController extends BaseAuthController implements ResourceControllerInte
     public function destroy($idvoo)
     {
         $this->loginFilterByRole('gestorvoo');
+
         $voo = Voo::find([$idvoo]);
         $voo->delete();
         Redirect::toRoute('voo/index');
