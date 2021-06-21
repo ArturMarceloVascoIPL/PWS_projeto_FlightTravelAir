@@ -15,6 +15,6 @@ class Voo extends \ActiveRecord\Model
     );
 
     static $has_many = array(
-      array('escalas', 'class_name' => 'Escala', 'primary_key' => 'idescala','order' => 'ordemescala')
+      array('escalas', 'class_name' => 'Escala', 'primary_key' => 'idescala', 'order' => 'ordemescala')
     );
 }

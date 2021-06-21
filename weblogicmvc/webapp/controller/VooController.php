@@ -55,7 +55,7 @@ class VooController extends BaseAuthController implements ResourceControllerInte
         if (is_null($voo)) {
             //TODO redirect to standard error page
         } else {
-            return View::make('voo.edit', ['voo' => $voo]);
+            return $this->update($idvoo);
         }
     }
 
