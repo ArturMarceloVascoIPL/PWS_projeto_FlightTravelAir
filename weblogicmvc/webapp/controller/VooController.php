@@ -1,7 +1,7 @@
 <?php
-use ArmoredCore\WebObjects\Debug;
+
 use ArmoredCore\WebObjects\Post;
-use ArmoredCore\WebObjects\View; 
+use ArmoredCore\WebObjects\View;
 use ArmoredCore\WebObjects\Redirect;
 use ArmoredCore\Interfaces\ResourceControllerInterface;
 
@@ -10,69 +10,80 @@ class VooController extends BaseAuthController implements ResourceControllerInte
     public function index()
     {
         $this->loginFilterByRole('gestorvoo');
-        return View::make('gestorvoo.index');
+
+        $voos = Voo::all();
+        return View::make('voo.index', ['voos' => $voos]);
+    }
+
+    public function show($id)
+    {
+        $this->loginFilterByRole('gestorvoo');
+
+        return $this->index();
     }
 
     public function create()
     {
         $this->loginFilterByRole('gestorvoo');
-        return View::make('gestorvoo.create');
+
+        return $this->store();
     }
 
     public function store()
     {
+        $this->loginFilterByRole('gestorvoo');
+
         //create new resource (activerecord/model) instance with data from POST
         //your form name fields must match the ones of the table fields
-        $user = new User(Post::getAll());
+        $voo = new Voo(array('precovenda' => '0'));
 
-        if($voo->is_valid()){
+        if ($voo->is_valid()) {
             $voo->save();
-            Redirect::toRoute('gestorvooapp/gerirusers');
+            Redirect::toRoute('voo/index');
         } else {
             //redirect to form with data and errors
-            Redirect::flashToRoute('gestorvooapp/create', ['voo' => $voo]);
+            Redirect::flashToRoute('voo/create', ['voo' => $voo]);
         }
-    }
-
-    public function show($id)
-    {
-        return $this->index();
     }
 
     public function edit($idvoo)
     {
         $this->loginFilterByRole('gestorvoo');
-        $voo = voo::find([$idvoo]);
+
+        $voo = Voo::find([$idvoo]);
 
         if (is_null($voo)) {
             //TODO redirect to standard error page
         } else {
-            return View::make('gestorvoo.edit', ['voo' => $voo]);
+            return $this->update($idvoo);
         }
     }
 
     public function update($idvoo)
     {
+        $this->loginFilterByRole('gestorvoo');
+
         //find resource (activerecord/model) instance where PK = $id
         //your form name fields must match the ones of the table fields
         $voo = Voo::find([$idvoo]);
+
         $voo->update_attributes(Post::getAll());
 
-        if($voo->is_valid()){
+        if ($voo->is_valid()) {
             $voo->save();
-            Redirect::toRoute('gestorvooapp/index');
+            Redirect::toRoute('voo/index');
         } else {
             //redirect to form with data and errors
-            Redirect::flashToRoute('gestorvooapp/edit', ['voo' => $voo]);
+            Redirect::flashToRoute('voo/edit', ['voo' => $voo]);
         }
     }
 
-    public function destroy($id)
+    public function destroy($idvoo)
     {
-        $voo = Voo::find([$id]);
+        $this->loginFilterByRole('gestorvoo');
+
+        $voo = Voo::find([$idvoo]);
         $voo->delete();
-        Redirect::toRoute('gestorvooapp/index');
+        Redirect::toRoute('voo/index');
     }
 }
-
-?>

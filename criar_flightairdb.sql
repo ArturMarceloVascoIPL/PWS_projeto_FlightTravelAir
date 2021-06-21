@@ -20,7 +20,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Criar a tabela "aviao"
-CREATE TABLE `avioes` (
+CREATE TABLE `aviaos` (
 	`idaviao` INT NOT NULL AUTO_INCREMENT,
     `referencia` VARCHAR(9) NOT NULL,
     `lotacao` INT NOT NULL,
@@ -39,21 +39,8 @@ CREATE TABLE `aeroportos` (
 -- Criar a tabela "voo"
 CREATE TABLE `voos` (
 	`idvoo` INT NOT NULL AUTO_INCREMENT,
-	`idpaeroporto` INT NOT NULL,
     `precovenda` VARCHAR(10) NOT NULL,
-    PRIMARY KEY (`idvoo`),
-    FOREIGN KEY (`idpaeroporto`) REFERENCES `aeroportos`(`idaeroporto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Criar a tabela "vooaviao"
-CREATE TABLE `voosavioes` (
-	`idvooaviao` INT NOT NULL AUTO_INCREMENT,
-    `idvoo` INT NOT NULL,
-    `idaviao` INT NOT NULL,
-    `passagensvendidas` VARCHAR(10) NOT NULL,
-    PRIMARY KEY (`idvooaviao`),
-    FOREIGN KEY (`idvoo`) REFERENCES `voos`(`idvoo`),
-    FOREIGN KEY (`idaviao`) REFERENCES `avioes`(`idaviao`)
+    PRIMARY KEY (`idvoo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Criar a tabela "passagemvenda"
@@ -75,11 +62,15 @@ CREATE TABLE `passagemvendas` (
 CREATE TABLE `escalas` (
 	`idescala` INT NOT NULL AUTO_INCREMENT,
     `idvoo` INT NOT NULL,
-    `idaeroportodestino` INT NOT NULL,
     `idaeroportoorigem` INT NOT NULL,
-    `datahoradestino` DATETIME NOT NULL,
-    `datahoraorigem` DATETIME NOT NULL,
+    `idaeroportodestino` INT NOT NULL, 
+    `dataorigem` DATE NOT NULL,
+    `horaorigem` TIME NOT NULL,
+    `datadestino` DATE NOT NULL,
+    `horadestino` TIME NOT NULL,
     `distancia` VARCHAR(10) NOT NULL,
+	`ordemescala` VARCHAR(10) NOT NULL,
+    `precoescala` VARCHAR(10) NOT NULL,
     PRIMARY KEY (`idescala`),
     FOREIGN KEY (`idvoo`) REFERENCES `voos`(`idvoo`),
     FOREIGN KEY (`idaeroportodestino`) REFERENCES `aeroportos`(`idaeroporto`),
@@ -91,10 +82,11 @@ CREATE TABLE `escalasavioes` (
 	`idescalaaviao` INT NOT NULL AUTO_INCREMENT,
     `idescala` INT NOT NULL,
     `idaviao` INT NOT NULL,
-    `numeropassageiros` VARCHAR(10) NOT NULL,
+    `numeropassageiroscheckin` VARCHAR(10) NOT NULL,
+    `numerobilhetesvendidos` VARCHAR(10) NOT NULL,
     PRIMARY KEY (`idescalaaviao`),
     FOREIGN KEY (`idescala`) REFERENCES `escalas`(`idescala`),
-    FOREIGN KEY (`idaviao`) REFERENCES `avioes`(`idaviao`)
+    FOREIGN KEY (`idaviao`) REFERENCES `aviaos`(`idaviao`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /* Inserir dados de teste na tabela "users" */
@@ -124,4 +116,22 @@ VALUES
 ('passageiroTeste', 'moradaTeste', 'email@teste.com', '123456789', '987654321', 'passageiro', 'passageiro', 'passageiro');
 
 
+/* Inserir dados de teste na tabela "aeroportos" */
 
+-- Aeroporto 1
+INSERT INTO `flightairdb`.`aeroportos`
+(`nome`, `localizacao`)
+VALUES
+('Aeroporto de Leiria', 'Leiria');
+
+-- Aeroporto 2
+INSERT INTO `flightairdb`.`aeroportos`
+(`nome`, `localizacao`)
+VALUES
+('Aeroporto de Lisboa', 'Lisboa');
+
+-- Aeroporto 1
+INSERT INTO `flightairdb`.`aeroportos`
+(`nome`, `localizacao`)
+VALUES
+('Aeroporto de Alentejo', 'Alentejo');

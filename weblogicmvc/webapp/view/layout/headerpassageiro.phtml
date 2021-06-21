@@ -13,7 +13,7 @@ use ArmoredCore\WebObjects\URL;
     <meta name="description" content="">
     <meta name="author" content="Silvio Priem Mendes, PhD">
 
-    <title>Página Operador Checkin</title>
+    <title>Página Passageiro</title>
 
     <?=AssetBundler::css()?>
 
@@ -30,24 +30,23 @@ use ArmoredCore\WebObjects\URL;
 </head>
 
 <body class="home">
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-inverse navbar-fixed-top headroom">
-        <div class="container">
-            <div class="navbar-header">
-                <!-- Button for smallest screens -->
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span
+<!-- Fixed navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top headroom">
+    <div class="container">
+        <div class="navbar-header">
+            <!-- Button for smallest screens -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span
                         class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                <!-- ALTERAR PARA OUTRA IMAGEM OU ALGO ASSIM <a class="navbar-brand" href="<?= URL::toRoute('home/index')?>"><img src="<?= Asset::image('logo.png')?>" alt="WEBlogic MVC"></a> -->
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav pull-right">
-                    <li class="active"><a href="<?= URL::toRoute('home/index')?>">Home</a></li>
-
-                    <li><a class="btn" href="<?= URL::toRoute('login/logout')?>">LOGOUT</a></li>
-                </ul>
-            </div>
-            <!--/.nav-collapse -->
         </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav pull-right">
+                <li class="active"><a href="<?= URL::toRoute('passageiroapp/index')?>">Home</a></li>
+
+                <li><a class="btn" href="<?= URL::toRoute('login/logout')?>">LOGOUT</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
     </div>
-    <!-- /.navbar -->
-    <header id="head" class="secondary"></header>
+</div>
+<!-- /.navbar -->
+<header id="head" class="secondary"></header>

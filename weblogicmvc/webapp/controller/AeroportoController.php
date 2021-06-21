@@ -1,12 +1,22 @@
 <?php
+
 use ArmoredCore\WebObjects\View;
 use ArmoredCore\WebObjects\Redirect;
 use ArmoredCore\WebObjects\Post;
+use ArmoredCore\Interfaces\ResourceControllerInterface;
 
-class AeroportoController extends BaseAuthController implements \ArmoredCore\Interfaces\ResourceControllerInterface
+class AeroportoController extends BaseAuthController implements ResourceControllerInterface
 {
+    public function index()
+    {
+        $this->loginFilterByRole('admin');
+        $aeroportos = Aeroporto::all();
+        return View::make('aeroporto.index', ['aeroportos' => $aeroportos]);
+    }
+
     public function show($id)
     {
+        $this->loginFilterByRole('admin');
         return $this->index();
     }
 
@@ -14,45 +24,6 @@ class AeroportoController extends BaseAuthController implements \ArmoredCore\Int
     {
         $this->loginFilterByRole('admin');
         return View::make('aeroporto.create');
-    }
-
-    public function destroy($idaeroporto)
-    {
-        $this->loginFilterByRole('admin');
-        $aeroporto = Aeroporto::find([$idaeroporto]);
-        $aeroporto->delete();
-        Redirect::toRoute('aeroporto/index');
-    }
-
-    public function update($idaeroporto)
-    {
-        //find resource (activerecord/model) instance where PK = $id
-        //your form name fields must match the ones of the table fields
-
-        $this->loginFilterByRole('admin');
-        $aeroporto = Aeroporto::find([$idaeroporto]);
-        $aeroporto->update_attributes(Post::getAll());
-
-        if ($aeroporto->is_valid()) {
-            $aeroporto->save();
-            Redirect::toRoute('aeroporto/index');
-        } else {
-            //redirect to form with data and errors
-            Redirect::flashToRoute('aeroporto/index', ['aeroporto' => $aeroporto]);
-        }
-    }
-
-    public function edit($idaeroporto)
-    {
-
-        $this->loginFilterByRole('admin');
-        $aeroporto = Aeroporto::find([$idaeroporto]);
-
-        if (is_null($aeroporto)) {
-            //TODO redirect to standard error page
-        } else {
-            return View::make('aeroporto.edit', ['aeroporto' => $aeroporto]);
-        }
     }
 
     public function store()
@@ -72,10 +43,44 @@ class AeroportoController extends BaseAuthController implements \ArmoredCore\Int
         }
     }
 
-    public function index()
+    public function edit($idaeroporto)
+    {
+
+        $this->loginFilterByRole('admin');
+        $aeroporto = Aeroporto::find([$idaeroporto]);
+
+        if (is_null($aeroporto)) {
+            //TODO redirect to standard error page
+        } else {
+            return View::make('aeroporto.edit', ['aeroporto' => $aeroporto]);
+        }
+    }
+
+
+    public function update($idaeroporto)
+    {
+        //find resource (activerecord/model) instance where PK = $id
+        //your form name fields must match the ones of the table fields
+
+        $this->loginFilterByRole('admin');
+        $aeroporto = Aeroporto::find([$idaeroporto]);
+        $aeroporto->update_attributes(Post::getAll());
+
+        if ($aeroporto->is_valid()) {
+            $aeroporto->save();
+            Redirect::toRoute('aeroporto/index');
+        } else {
+            //redirect to form with data and errors
+            Redirect::flashToRoute('aeroporto/index', ['aeroporto' => $aeroporto]);
+        }
+    }
+
+
+    public function destroy($idaeroporto)
     {
         $this->loginFilterByRole('admin');
-        $aeroportos = Aeroporto::all();
-        return View::make('aeroporto.index', ['aeroportos' => $aeroportos]);
+        $aeroporto = Aeroporto::find([$idaeroporto]);
+        $aeroporto->delete();
+        Redirect::toRoute('aeroporto/index');
     }
 }

@@ -1,0 +1,60 @@
+﻿<?php
+
+use ArmoredCore\WebObjects\URL;
+use ArmoredCore\WebObjects\Data;
+use ArmoredCore\WebObjects\Layout;
+
+Layout::includeLayout('headergestorvoo'); ?>
+<?php $voos = Data::get('voos'); ?>
+
+<!-- container  Aviões -->
+<div class="container">
+
+    <ol class="breadcrumb">
+        <li><a href="<?= Url::toRoute('gestorvooapp/index') ?>">Home</a></li>
+        <li class="active">Gerir Voos</li>
+    </ol>
+
+    <h2 class="text-left top-space">Lista de Voos</h2>
+    <h2 class="top-space"></h2>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-striped">
+                <thead>
+                    <th>
+                        <h3>Id</h3>
+                    </th>
+                    <th>
+                        <h3>Preco Venda</h3>
+                    </th>
+                    <th>
+                        <h3>Opcoes</h3>
+                    </th>
+                </thead>
+                <tbody>
+                    <?php foreach ($voos as $voo) { ?>
+                    <tr>
+                        <td><?= $voo->idvoo ?></td>
+                        <td><?= $voo->precovenda ?> €</td>
+                        <td>
+                            <a href="<?= Url::toRoute('escala/index', $voo->idvoo) ?>" class="btn btn-success"
+                               role="button">Adicionar Escala</a>
+                            <a href="<?= Url::toRoute('voo/destroy', $voo->idvoo) ?>" class="btn btn-warning"
+                                role="button">Apagar</a>
+                        </td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+            <div class="col-sm-6">
+                <h3>Criar novo Voo</h3>
+                <p>
+                    <a href="<?= Url::toRoute('voo/create') ?>" class="btn btn-info" role="button">Novo</a>
+                </p>
+            </div>
+        </div>
+    </div> <!-- /row -->
+</div>
+<!-- /container -->
+
+<?php Layout::includeLayout('footer') ?>
